@@ -186,6 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1.8
+  _SpriteRenderer: {fileID: 164783055261997175}
+  _animator: {fileID: 0}
 --- !u!114 &2874355928460490458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0a081a72351f043813c3a880f1b14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 200
+  hp: 200
   hpImg: {fileID: 0}
+  hpText: {fileID: 0}
+  coins: 0
+  coinsAmount: {fileID: 0}
+  coinsText: {fileID: 0}
 --- !u!50 &164783055261997173
 Rigidbody2D:
   serializedVersion: 4

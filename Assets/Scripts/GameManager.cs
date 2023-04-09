@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour
     public GameObject gui;
 
     public GameState gameState;
-    
+
     public GameObject player;
-    private PlayerController playerC;
+    private PlayerController _playerController;
+    private PlayerManager _playerManager;
 
     public int levelNumber = 0;
-    
+
     private bool sound = true;
     private bool music = true;
 
@@ -36,13 +37,14 @@ public class GameManager : MonoBehaviour
         Credits,
         Death
     }
-    
+
     void Start()
     {
         UIToggle();
         mainMenu.gameObject.SetActive(true);
-        
-        playerC = player.GetComponent<PlayerController>();
+
+        _playerController = player.GetComponent<PlayerController>();
+        _playerManager = player.GetComponent<PlayerManager>();
     }
 
     void Update()
@@ -52,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
 
     void UIToggle()
-    {   
+    {
         mainMenu.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         levels.gameObject.SetActive(false);
@@ -65,34 +67,35 @@ public class GameManager : MonoBehaviour
 
     public void BtnColor()
     {
-
     }
 
     public void NextLevel(int levelNumber)
     {
-        
-        Debug.Log("Level "+ levelNumber +" entered.");
+        Debug.Log("Level " + levelNumber + " entered.");
     }
-
-    #region UI
+    
     public void StartGame()
     {
         UIToggle();
         gameState = GameState.Game;
         gui.gameObject.SetActive(true);
 
-        playerC.transform.position = new Vector3(0f, 0f, 0f);
-        playerC.Freeze(false);
+        _playerController.transform.position = new Vector3(0f, 0f, 0f);
+        _playerController.Freeze(false);
+        _playerManager.SetMaxHP();
+        
         Debug.Log("Game started");
     }
+    
 
+    #region UI
     public void Menu()
     {
         UIToggle();
         gameState = GameState.Menu;
         mainMenu.SetActive(true);
     }
-    
+
     public void Levels()
     {
         UIToggle();
@@ -104,17 +107,17 @@ public class GameManager : MonoBehaviour
     {
         levelNumber = lvl;
     }
-    
+
     public void Options()
     {
         UIToggle();
         gameState = GameState.Options;
         options.gameObject.SetActive(true);
     }
-    
+
     public void Credits()
     {
-        UIToggle(); 
+        UIToggle();
         gameState = GameState.Credits;
         credits.gameObject.SetActive(true);
     }
@@ -123,7 +126,7 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-    
+
     public void Pause()
     {
         switch (gameState)
@@ -131,29 +134,29 @@ public class GameManager : MonoBehaviour
             case GameState.Game:
                 gameState = GameState.Pause;
                 pauseMenu.gameObject.SetActive(true);
-                playerC.Freeze(true);
+                _playerController.Freeze(true);
                 break;
 
             case GameState.Pause:
                 gameState = GameState.Game;
                 pauseMenu.gameObject.SetActive(false);
-                playerC.Freeze(false);
+                _playerController.Freeze(false);
                 break;
         }
     }
-    
+
     public void Death()
     {
         UIToggle();
         gameState = GameState.Death;
         death.gameObject.SetActive(true);
-        playerC.Freeze(true);
+        _playerController.Freeze(true);
     }
-    
+
     public void Sound()
     {
         sound = !sound;
-        
+
         string temp = sound == true ? "On" : "Off";
         GameObject.Find("soundBtnText").GetComponent<TextMeshProUGUI>().text = temp;
     }
@@ -161,12 +164,10 @@ public class GameManager : MonoBehaviour
     public void Music()
     {
         music = !music;
-        
+
         string temp = music == true ? "On" : "Off";
         GameObject.Find("musicBtnText").GetComponent<TextMeshProUGUI>().text = temp;
     }
-    
+
     #endregion
-    
-    
 }

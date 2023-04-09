@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    public float hp = 200;
+    public float hp;
     private float maxHp = 200;
-    
+
     public Image hpImg;
     public TextMeshProUGUI hpText;
 
@@ -20,37 +20,44 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
         coinsAmount.text = coins.ToString();
     }
 
+    private void Update()
+    {
+        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
+    }
+
     #region HP
-    public void Heal(int amount)
+    public void SetMaxHP()
+    {
+        hp = maxHp;
+    }
+    
+    public void Heal(float amount)
     {
         if (hp < maxHp) hp += amount;
         if (hp > maxHp) hp -= hp - maxHp;
-
-        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
+        
         hpText.text = "+" + amount;
         hpText.color = Color.green;
-        hpText.CrossFadeAlpha(1,0,false);
-        hpText.CrossFadeAlpha(0,5,true);
-        
-        Debug.Log("Heal: +"+ amount);
+        hpText.CrossFadeAlpha(1, 0, false);
+        hpText.CrossFadeAlpha(0, 5, true);
+
+        Debug.Log("Heal: +" + amount);
     }
-    
-    public void Damage(int amount)
+
+    public void Damage(float amount)
     {
         hp -= amount;
         if (hp <= 0) Died();
         
-        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
         hpText.text = "-" + amount;
         hpText.color = Color.red;
-        hpText.CrossFadeAlpha(1,0,false);
-        hpText.CrossFadeAlpha(0,5,true);
+        hpText.CrossFadeAlpha(1, 0, false);
+        hpText.CrossFadeAlpha(0, 5, true);
 
-        Debug.Log("Damage: -"+ amount);
+        Debug.Log("Damage: -" + amount);
     }
 
     private void Died()
@@ -58,31 +65,34 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Death");
         GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
     }
+
     #endregion
-    
+
     #region Coins
-    public void AddCoins(int amount)
+
+    public void AddCoins(float amount)
     {
         coins += amount;
         coinsAmount.text = coins.ToString();
-        
+
         coinsText.text = "+" + amount;
-        coinsText.CrossFadeAlpha(1,0,false);
-        coinsText.CrossFadeAlpha(0,5,true);
-        
-        Debug.Log("Coins: +"+ amount);
+        coinsText.CrossFadeAlpha(1, 0, false);
+        coinsText.CrossFadeAlpha(0, 5, true);
+
+        Debug.Log("Coins: +" + amount);
     }
 
-    public void SubtractCoins(int amount)
+    public void SubtractCoins(float amount)
     {
         coins -= amount;
         coinsAmount.text = coins.ToString();
-        
+
         coinsText.text = "-" + amount;
-        coinsText.CrossFadeAlpha(1,0,false);
-        coinsText.CrossFadeAlpha(0,5,true);
-        
-        Debug.Log("Coins: -"+ amount);
+        coinsText.CrossFadeAlpha(1, 0, false);
+        coinsText.CrossFadeAlpha(0, 5, true);
+
+        Debug.Log("Coins: -" + amount);
     }
+
     #endregion
 }
