@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5024134040321715259}
   - component: {fileID: 6235881903237551027}
-  - component: {fileID: 5228124043764504832}
   - component: {fileID: 3612410684814384860}
+  - component: {fileID: 2764173585339505811}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -86,39 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &5228124043764504832
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6124177886727687602}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.08, y: 0.08}
-    newSize: {x: 0.08, y: 0.08}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.011073247, y: 0.031649165}
-      - {x: -0.03107325, y: 0.010785288}
-      - {x: -0.031361207, y: -0.020785285}
-      - {x: -0.012146493, y: -0.04028796}
-      - {x: 0.010418726, y: -0.04057592}
-      - {x: 0.030785281, y: -0.021649165}
-      - {x: 0.030497326, y: 0.011649168}
-      - {x: 0.012513047, y: 0.031361207}
 --- !u!114 &3612410684814384860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +99,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 30
+--- !u!58 &2764173585339505811
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6124177886727687602}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0003401041, y: -0.0045903325}
+  serializedVersion: 2
+  m_Radius: 0.04221022

@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Game;
         gui.gameObject.SetActive(true);
 
-        _playerController.transform.position = new Vector3(0f, 0f, 0f);
+        _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
         _playerController.Freeze(false);
         _playerManager.SetMaxHP();
         

@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
     {
         hp -= amount;
         if (hp <= 0) Died();
-        
+
         hpText.text = "-" + amount;
         hpText.color = Color.red;
         hpText.CrossFadeAlpha(1, 0, false);

@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     public float speed;
     public float minimumDistance;
+    public float hp;
     public EnemyType _enemyType;
 
     public Animator _animator;
@@ -29,6 +30,7 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private PlayerController _playerController;
     private PlayerManager _playerManager;
+    private PlayerDetection _playerDetection;
 
     private bool dealDmg = false;
 
@@ -39,37 +41,34 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         _playerController = player.GetComponent<PlayerController>();
         _playerManager = player.GetComponent<PlayerManager>();
+        _playerDetection = gameObject.GetComponent<PlayerDetection>();
 
         if (weapon != null) weaponAnim = weapon.GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        oldPos = gameObject.transform.position;
+        oldPos = transform.position;
+        if (_playerDetection.playerVisible)
+        {
+            rb.MovePosition(player.transform.position);
+            transform.position =
+                Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
-        rb.MovePosition(player.transform.position);
+            if (transform.position.x < oldPos.x) transform.localRotation = Quaternion.Euler(0, 180, 0);
+            else if (transform.position.x > oldPos.x) transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
 
-        if (gameObject.transform.position != oldPos) _animator.SetBool("Moving", true);
-        else _animator.SetBool("Moving", false);
+        if (transform.position != oldPos) _animator.SetBool("Moving", true);
+        else if (transform.position == oldPos) _animator.SetBool("Moving", false);
 
-        transform.position = Vector2.MoveTowards(gameObject.transform.position,
-            player.transform.position, speed * Time.deltaTime);
-        
-        if (gameObject.transform.position.x < oldPos.x) transform.localRotation = Quaternion.Euler(0, 180, 0);
-        else if (gameObject.transform.position.x > oldPos.x) transform.localRotation = Quaternion.Euler(0, 0, 0);
-        
         /*
         if (Vector2.Distance(transform.position, player.transform.position) < minimumDistance)
         {
         }
         */
     }
-
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         //melee
@@ -80,4 +79,18 @@ public class EnemyController : MonoBehaviour
     {
         if (col.gameObject.tag == "Player") weaponAnim.SetBool("Attack", false);
     }
+
+    
+
+    public void Damage(float amount)
+    {
+        hp -= amount;
+        if (hp <= 0) Death();
+    }
+
+    private void Death()
+    {
+        Destroy(this);
+    }
+    
 }
