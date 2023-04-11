@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponFirearm : MonoBehaviour
 {
     public float damage;
-    public WeaponType _weaponType;
+    public float bulletSpeed;
     public Animator _animator;
-
-    private BoxCollider2D meeleWeaponCollider;
 
     private GameObject player;
     private PlayerController _playerController;
@@ -17,17 +15,10 @@ public class WeaponManager : MonoBehaviour
 
     private EnemyController _enemyController;
     
-    public enum WeaponType
-    {
-        Melee,
-        Bullet
-    }
     
     // Start is called before the first frame update
     void Start()
     {
-        if (_weaponType == WeaponType.Melee) meeleWeaponCollider = gameObject.GetComponent<BoxCollider2D>();
-        
         player = GameObject.FindWithTag("Player");
         _playerController = player.GetComponent<PlayerController>();
         _playerManager = player.GetComponent<PlayerManager>();
@@ -38,12 +29,16 @@ public class WeaponManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var mousePos = Camera.main.WorldToScreenPoint(transform.position);
+        var dir = Input.mousePosition - mousePos;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        
+        if (col.gameObject.tag == "Player") _playerManager.Damage(damage);
+        if (col.gameObject.tag == "Enemy") _enemyController.Damage(damage);
     }
 
     public void Hit()

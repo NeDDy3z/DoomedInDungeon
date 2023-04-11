@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
 
     private bool dealDmg = false;
 
-    void Start()
+    void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
 

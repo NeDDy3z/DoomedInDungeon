@@ -21,7 +21,7 @@ public class MapSwitcher : MonoBehaviour
         if (Demo)
         {
             _gameManager.Menu();
-            _playerController.Freeze(true);
+            
         }
         else _gameManager.NextLevel(_gameManager.levelNumber + 1);
 

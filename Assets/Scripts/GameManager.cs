@@ -76,8 +76,9 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
-        UIToggle();
         gameState = GameState.Game;
+        
+        UIToggle();
         gui.gameObject.SetActive(true);
 
         _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
@@ -91,15 +92,18 @@ public class GameManager : MonoBehaviour
     #region UI
     public void Menu()
     {
-        UIToggle();
         gameState = GameState.Menu;
+        
+        UIToggle();
         mainMenu.SetActive(true);
+        _playerController.Freeze(true);
     }
 
     public void Levels()
     {
-        UIToggle();
         gameState = GameState.Levels;
+        
+        UIToggle();
         levels.gameObject.SetActive(true);
     }
 
@@ -110,21 +114,24 @@ public class GameManager : MonoBehaviour
 
     public void Options()
     {
-        UIToggle();
         gameState = GameState.Options;
+        
+        UIToggle();
         options.gameObject.SetActive(true);
     }
 
     public void Credits()
     {
-        UIToggle();
         gameState = GameState.Credits;
+        
+        UIToggle();
         credits.gameObject.SetActive(true);
     }
 
     public void ExitGame()
     {
         Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void Pause()
