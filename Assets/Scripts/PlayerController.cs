@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
 
-    private bool freeze = true;
+    private bool freeze;
     private float moveHorizontal;
     private float moveVertical;
     private Vector3 mousePos;
@@ -42,19 +42,8 @@ public class PlayerController : MonoBehaviour
 
         if (!freeze) rb.MovePosition(transform.position += moveInput);
 
-        if (/*moveHorizontal < 0 ||*/ mousePos.x < 0)
-        {
-            character.transform.localRotation = Quaternion.Euler(0, 180f, 0);
-            weapon.transform.localScale = new Vector3(1, -1,1);
-        }
-
-        if (/*moveHorizontal > 0 ||*/ mousePos.x > 0)
-        {
-            character.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            weapon.transform.localScale = new Vector3(1, 1,1);
-        }
-        
-        
+        if (mousePos.x < 0) character.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+        if (mousePos.x > 0) character.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void Freeze(bool choice)

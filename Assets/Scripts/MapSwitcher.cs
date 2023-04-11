@@ -18,11 +18,7 @@ public class MapSwitcher : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (Demo)
-        {
-            _gameManager.Menu();
-            
-        }
+        if (Demo) _gameManager.Menu();
         else _gameManager.NextLevel(_gameManager.levelNumber + 1);
 
         

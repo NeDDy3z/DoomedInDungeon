@@ -33,13 +33,4 @@ public class Hitbox : MonoBehaviour
             _enemyController = enemy.GetComponent<EnemyController>();
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Bullet")
-        {
-            if (_entity == Entity.player) _playerManager.Damage(col.GetComponent<Bullet>().damage);
-            else _enemyController.Damage(col.GetComponent<Bullet>().damage);
-        }
-    }
 }

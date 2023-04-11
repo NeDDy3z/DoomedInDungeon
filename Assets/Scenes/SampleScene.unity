@@ -17423,7 +17423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7733998962899420209, guid: 41323f50deb4fca4d8aac839cc046c43, type: 3}
       propertyPath: showRadius
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7733998962899420212, guid: 41323f50deb4fca4d8aac839cc046c43, type: 3}
       propertyPath: m_RootOrder
@@ -19265,7 +19265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7733998962899420209, guid: 41323f50deb4fca4d8aac839cc046c43, type: 3}
       propertyPath: showRadius
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7733998962899420212, guid: 41323f50deb4fca4d8aac839cc046c43, type: 3}
       propertyPath: m_RootOrder
@@ -28515,8 +28515,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 824946107}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29375,7 +29375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7733998962899420209, guid: 41323f50deb4fca4d8aac839cc046c43, type: 3}
       propertyPath: showRadius
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7733998962899420212, guid: 41323f50deb4fca4d8aac839cc046c43, type: 3}
       propertyPath: m_RootOrder

@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         gui.gameObject.SetActive(true);
 
         _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
-        _playerController.Freeze(false);
+        Time.timeScale = 1;
         _playerManager.SetMaxHP();
         
         Debug.Log("Game started");
@@ -96,7 +96,6 @@ public class GameManager : MonoBehaviour
         
         UIToggle();
         mainMenu.SetActive(true);
-        _playerController.Freeze(true);
     }
 
     public void Levels()
@@ -141,13 +140,13 @@ public class GameManager : MonoBehaviour
             case GameState.Game:
                 gameState = GameState.Pause;
                 pauseMenu.gameObject.SetActive(true);
-                _playerController.Freeze(true);
+                Time.timeScale = 0;
                 break;
 
             case GameState.Pause:
                 gameState = GameState.Game;
                 pauseMenu.gameObject.SetActive(false);
-                _playerController.Freeze(false);
+                Time.timeScale = 1;
                 break;
         }
     }
@@ -157,7 +156,8 @@ public class GameManager : MonoBehaviour
         UIToggle();
         gameState = GameState.Death;
         death.gameObject.SetActive(true);
-        _playerController.Freeze(true);
+        
+        Time.timeScale = 0;
     }
 
     public void Sound()

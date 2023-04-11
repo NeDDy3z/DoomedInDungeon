@@ -32,8 +32,6 @@ public class EnemyController : MonoBehaviour
     private PlayerManager _playerManager;
     private PlayerDetection _playerDetection;
 
-    private bool dealDmg = false;
-
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();

@@ -8,7 +8,9 @@ TagManager:
   - Heal
   - Coin
   - Enemy
-  - Weapon_Melee
+  - Bullet
+  - HitboxPlayer
+  - HitboxEnemy
   layers:
   - Default
   - TransparentFX
