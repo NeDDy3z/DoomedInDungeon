@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     private PlayerController _playerController;
-    private PlayerManager _playerManager;
 
     public int levelNumber = 0;
 
@@ -42,9 +41,6 @@ public class GameManager : MonoBehaviour
     {
         UIToggle();
         mainMenu.gameObject.SetActive(true);
-
-        _playerController = player.GetComponent<PlayerController>();
-        _playerManager = player.GetComponent<PlayerManager>();
     }
 
     void Update()
@@ -81,10 +77,13 @@ public class GameManager : MonoBehaviour
         UIToggle();
         gui.gameObject.SetActive(true);
 
+        Instantiate(player);
+        _playerController = player.GetComponent<PlayerController>();
+
         _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
-        Time.timeScale = 1;
-        _playerManager.SetMaxHP();
+        _playerController.SetMaxHP();
         
+        Time.timeScale = 1;
         Debug.Log("Game started");
     }
     

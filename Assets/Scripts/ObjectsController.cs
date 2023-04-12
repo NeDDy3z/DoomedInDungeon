@@ -7,7 +7,6 @@ using UnityEngine;
 public class ObjectsController : MonoBehaviour
 {
     private GameObject player;
-    private PlayerManager _playerManager;
     private PlayerController _playerController;
     
     public int amount;
@@ -15,7 +14,6 @@ public class ObjectsController : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        _playerManager = player.GetComponent<PlayerManager>();
         _playerController = player.GetComponent<PlayerController>();
     }
 
@@ -23,9 +21,9 @@ public class ObjectsController : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            if (gameObject.tag == "Damage") _playerManager.Damage(amount);
-            if (gameObject.tag == "Heal") _playerManager.Heal(amount);
-            if (gameObject.tag == "Coin") _playerManager.AddCoins(amount);
+            if (gameObject.tag == "Damage") _playerController.Damage(amount);
+            if (gameObject.tag == "Heal") _playerController.Heal(amount);
+            if (gameObject.tag == "Coin") _playerController.AddCoins(amount);
             gameObject.SetActive(false);
         }
     }

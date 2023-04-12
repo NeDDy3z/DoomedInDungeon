@@ -28,17 +28,13 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 oldPos;
     private GameObject player;
-    private PlayerController _playerController;
-    private PlayerManager _playerManager;
     private PlayerDetection _playerDetection;
 
-    void Awake()
+    void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         player = GameObject.FindWithTag("Player");
-        _playerController = player.GetComponent<PlayerController>();
-        _playerManager = player.GetComponent<PlayerManager>();
         _playerDetection = gameObject.GetComponent<PlayerDetection>();
 
         if (weapon != null) weaponAnim = weapon.GetComponent<Animator>();
@@ -88,7 +84,8 @@ public class EnemyController : MonoBehaviour
 
     private void Death()
     {
-        Destroy(this);
+        _animator.SetBool("Moving", false);
+        Destroy(transform.gameObject);
     }
     
 }

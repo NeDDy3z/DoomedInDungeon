@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public float hp;
+    public float maxHp;
+    public float coins;
     public float movementSpeed = 2f;
 
     public GameObject character;
@@ -50,4 +53,49 @@ public class PlayerController : MonoBehaviour
     {
         freeze = choice;
     }
+
+
+    
+    public void SetMaxHP()
+    {
+        hp = maxHp;
+    }
+    
+    public void Heal(float amount)
+    {
+        if (hp < maxHp) hp += amount;
+        if (hp > maxHp) hp -= hp - maxHp;
+        
+        Debug.Log("Heal: +" + amount);
+    }
+
+    public void Damage(float amount)
+    {
+        hp -= amount;
+        if (hp <= 0) Died();
+
+        Debug.Log("Damage: -" + amount);
+    }
+
+    private void Died()
+    {
+        Debug.Log("Death");
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
+        Destroy(transform.gameObject);
+    }
+    
+    public void AddCoins(float amount)
+    {
+        coins += amount;
+
+        Debug.Log("Coins: +" + amount);
+    }
+
+    public void SubtractCoins(float amount)
+    {
+        coins -= amount;
+
+        Debug.Log("Coins: -" + amount);
+    }
+    
 }

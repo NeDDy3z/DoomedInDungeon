@@ -11,7 +11,7 @@ public class WeaponMelee : MonoBehaviour
     private BoxCollider2D meeleWeaponCollider;
 
     private GameObject player;
-    private PlayerManager _playerManager;
+    private PlayerController _playerController;
 
 
     // Start is called before the first frame update
@@ -20,12 +20,12 @@ public class WeaponMelee : MonoBehaviour
         meeleWeaponCollider = gameObject.GetComponent<BoxCollider2D>();
         
         player = GameObject.FindWithTag("Player");
-        _playerManager = player.GetComponent<PlayerManager>();
-        
+        _playerController = player.GetComponent<PlayerController>();
+
     }
 
     public void Hit()
     {
-        if (_playerManager.hp > 0) _playerManager.Damage(damage);
+        if (_playerController.hp > 0) _playerController.Damage(damage);
     }
 }

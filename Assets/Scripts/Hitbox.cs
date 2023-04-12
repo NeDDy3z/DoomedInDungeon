@@ -7,8 +7,8 @@ public class Hitbox : MonoBehaviour
 {
     public enum Entity
     {
-        player,
-        enemy
+        Player,
+        Enemy
     }
 
     public Entity _entity;
@@ -16,16 +16,16 @@ public class Hitbox : MonoBehaviour
     private GameObject player;
     private GameObject enemy;
 
-    private PlayerManager _playerManager;
+    private PlayerController _playerController;
     private EnemyController _enemyController;
 
 
     void Start()
     {
-        if (_entity == Entity.player)
+        if (_entity == Entity.Player)
         {
             player = GameObject.FindWithTag("Player");
-            _playerManager = player.GetComponent<PlayerManager>();
+            _playerController = player.GetComponent<PlayerController>();
         }
         else
         {

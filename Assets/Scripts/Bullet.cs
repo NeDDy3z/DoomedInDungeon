@@ -6,40 +6,38 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Rigidbody2D rb;
+
+    public float damage;
+    public float speed;
+    public FiredBy _firedBy;
     
-    private float damage;
-    private float speed;
+    private PlayerController _playerController;
 
-    private GameObject weapon;
-    private WeaponFirearm _weaponFirearm;
-    
-    private PlayerManager _playerManager;
-    private GameObject enemy;
-
-
-    void Awake()
+    public enum FiredBy
     {
-        _playerManager = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
-        _weaponFirearm = transform.parent.transform.parent.gameObject.GetComponent<WeaponFirearm>();
-        
-        damage = _weaponFirearm.damage;
-        speed = _weaponFirearm.bulletSpeed;
+        Player,
+        Enemy
+    }
+
+    void Start()
+    {
+        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.IsTouchingLayers(8)) Destroy(this, 1); //runs into wall, it destroys itself
-        
-        if (col.gameObject.tag == "HitboxPlayer" && _weaponFirearm._EntityType == WeaponFirearm.EntityType.Enemy)
+        if (col.gameObject.tag == "WallCollision") Destroy(transform.gameObject); //runs into wall, it destroys itself
+
+        if (col.gameObject.tag == "HitboxPlayer" && _firedBy == FiredBy.Enemy)
         {
-            _playerManager.Damage(damage);
-            Destroy(this, 1);
+            _playerController.Damage(damage);
+            Destroy(transform.gameObject);
         }
 
-        if (col.gameObject.tag == "HitboxEnemy" && _weaponFirearm._EntityType == WeaponFirearm.EntityType.Player)
+        if (col.gameObject.tag == "HitboxEnemy" && _firedBy == FiredBy.Player)
         {
-            col.gameObject.transform.parent.transform.parent.GetComponent<EnemyController>().Damage(damage);
-            Destroy(this, 1);
+            col.gameObject.transform.parent.GetComponent<EnemyController>().Damage(damage);
+            Destroy(transform.gameObject);
         }
     }
 }
