@@ -10,21 +10,27 @@ public class WeaponFirearm : MonoBehaviour
     public float bulletSpeed;
 
     public GameObject bulletPrefab;
+    public EntityType _EntityType;
 
     private GameManager _gameManager;
-    private GameObject gun;
-    private Animator _animator;
+    private GameObject weapon;
     private Transform shootingPoint;
-
+    private Animator _animator;
+    
+    public enum EntityType
+    {
+        Player,
+        Enemy
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         _gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
-        gun = gameObject.transform.GetChild(0).gameObject;
-        _animator = gun.transform.GetChild(0).GetComponent<Animator>();
-        shootingPoint = gun.transform.GetChild(1).gameObject.transform;
+        weapon = gameObject.transform.GetChild(0).gameObject;
+        shootingPoint = weapon.transform.GetChild(1).gameObject.transform;
+        _animator = weapon.transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,5 +54,9 @@ public class WeaponFirearm : MonoBehaviour
 
     public void Fire()
     {
+        GameObject projectile = Instantiate(bulletPrefab, shootingPoint.position,
+            shootingPoint.rotation);
+        projectile.GetComponent<Rigidbody2D>()
+            .AddForce(shootingPoint.right * 2, ForceMode2D.Impulse);
     }
 }
