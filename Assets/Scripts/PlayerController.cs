@@ -22,10 +22,13 @@ public class PlayerController : MonoBehaviour
     private float moveVertical;
     private Vector3 mousePos;
 
+    private UIManager _uiManager;
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        _uiManager = GameObject.FindWithTag("GameController").gameObject.transform.GetChild(0)
+            .GetComponent<UIManager>();
     }
 
     private void Update()
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
     public void Freeze(bool choice)
     {
         freeze = choice;
+        
+        Debug.Log("Player frozen: "+ freeze);
     }
 
 
@@ -59,12 +64,16 @@ public class PlayerController : MonoBehaviour
     public void SetMaxHP()
     {
         hp = maxHp;
+        _uiManager.UpdateData();
+
+        Debug.Log("HP set to max");
     }
     
     public void Heal(float amount)
     {
         if (hp < maxHp) hp += amount;
         if (hp > maxHp) hp -= hp - maxHp;
+        _uiManager.UpdateHP();
         
         Debug.Log("Heal: +" + amount);
     }
@@ -73,7 +82,8 @@ public class PlayerController : MonoBehaviour
     {
         hp -= amount;
         if (hp <= 0) Died();
-
+        _uiManager.UpdateHP();
+        
         Debug.Log("Damage: -" + amount);
     }
 
@@ -81,20 +91,21 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Death");
         GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
-        Destroy(transform.gameObject);
     }
     
     public void AddCoins(float amount)
     {
         coins += amount;
-
+        _uiManager.UpdateCoins();
+        
         Debug.Log("Coins: +" + amount);
     }
 
     public void SubtractCoins(float amount)
     {
         coins -= amount;
-
+        _uiManager.UpdateCoins();
+        
         Debug.Log("Coins: -" + amount);
     }
     

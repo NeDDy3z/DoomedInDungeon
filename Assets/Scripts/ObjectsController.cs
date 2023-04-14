@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class ObjectsController : MonoBehaviour
 {
+    public int amount;
+
     private GameObject player;
     private PlayerController _playerController;
-    
-    public int amount;
-    
+
+
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
@@ -27,5 +28,4 @@ public class ObjectsController : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    
 }

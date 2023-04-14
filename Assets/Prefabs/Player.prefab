@@ -238,6 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a94ff045f0b3eb459a2ed08dd4dcb36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  maxHp: 200
+  coins: 0
   movementSpeed: 1.8
   character: {fileID: 2019357276953446426}
   weapon: {fileID: 5797302056912722590}

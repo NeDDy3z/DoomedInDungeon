@@ -25,7 +25,12 @@ public class UIManager : MonoBehaviour
     {
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         coinsAmount.text = coins.ToString();
+    }
 
+    
+    
+    public void UpdateData()
+    {
         hp = _playerController.hp;
         oldHp = hp;
         maxHp = _playerController.maxHp;
@@ -33,26 +38,23 @@ public class UIManager : MonoBehaviour
         oldCoins = coins;
     }
 
-    private void Update()
-    {
-        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
-    }
-
-
     public void UpdateHP()
     {
         hp = _playerController.hp;
-        if (hp > oldHp)
+        if (hp >= oldHp)
         {
-            hpText.text = "+" + (hp - oldHp);
+            int temp = Convert.ToInt32(hp) - Convert.ToInt32(oldHp);
+            hpText.text = "+"+ ((int)oldHp - (int)hp);
             hpText.color = Color.green;
         }
         else
         {
-            hpText.text = "-" + (oldHp - hp);
+            hpText.text = (Convert.ToInt32(hp) - Convert.ToInt32(oldHp)).ToString();
             hpText.color = Color.red;
         }
         oldHp = hp;
+        
+        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
         
         hpText.CrossFadeAlpha(1, 0, false);
         hpText.CrossFadeAlpha(0, 5, true);
@@ -63,8 +65,9 @@ public class UIManager : MonoBehaviour
         coinsAmount.text = coins.ToString();
         
         coins = _playerController.coins;
-        if (coins > oldCoins) coinsText.text = "+" + (oldCoins - coins);
-        else coinsText.text = "-" + (coins - oldCoins);
+        if (coins > oldCoins)
+            coinsText.text = "+" + (Convert.ToInt32(coins) - Convert.ToInt32(oldCoins));
+        else coinsText.text = "-" + (Convert.ToInt32(oldCoins) - Convert.ToInt32(coins));
         oldCoins = coins;
         
         hpText.CrossFadeAlpha(1, 0, false);

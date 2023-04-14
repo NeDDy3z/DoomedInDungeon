@@ -76,8 +76,7 @@ public class GameManager : MonoBehaviour
         
         UIToggle();
         gui.gameObject.SetActive(true);
-
-        Instantiate(player);
+        
         _playerController = player.GetComponent<PlayerController>();
 
         _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
