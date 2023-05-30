@@ -244,7 +244,7 @@ MonoBehaviour:
   movementSpeed: 1.8
   character: {fileID: 2019357276953446426}
   weapon: {fileID: 5797302056912722590}
-  _animator: {fileID: 0}
+  _animator: {fileID: 2123063789468044732}
 --- !u!50 &2019357278779493623
 Rigidbody2D:
   serializedVersion: 4
@@ -346,6 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5421119936642218349}
   - component: {fileID: 1012810480938973175}
+  - component: {fileID: 2123063789468044732}
   m_Layer: 0
   m_Name: Doom
   m_TagString: Untagged
@@ -361,8 +362,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7149510121990916664}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.0271, y: 0.1453, z: 0}
+  m_LocalScale: {x: 0.9938957, y: 0.9938957, z: 0.9938957}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2019357276953446427}
@@ -409,7 +410,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: c3bc5a58bb6fd26429f00d6e832191b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cfd3e9a1371584e4d862ef1ee540292c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -420,3 +421,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2123063789468044732
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149510121990916664}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7591f6a0901b6584e9d4afa9c7b9d625, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

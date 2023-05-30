@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapSwitcher : MonoBehaviour
 {
     private GameManager _gameManager;
     private PlayerController _playerController;
+
+    public int sceneBuildIndex;
     public bool Demo;
 
     void Start()
@@ -19,12 +22,7 @@ public class MapSwitcher : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "HitboxPlayer")
-        {
-            if (Demo) _gameManager.Menu();
-            else _gameManager.NextLevel(_gameManager.levelNumber + 1);
-            
-            Debug.Log("Level switch from: "+ _gameManager.levelNumber +" - to: "+ _gameManager.levelNumber + 1);
-        }
-       
+            if (sceneBuildIndex == 999) _gameManager.End();
+            else SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
     }
 }

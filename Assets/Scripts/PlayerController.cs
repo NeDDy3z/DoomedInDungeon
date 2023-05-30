@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private UIManager _uiManager;
 
+    private bool movehor;
+    private bool movever;
+    
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -36,6 +39,14 @@ public class PlayerController : MonoBehaviour
         moveHorizontal = Input.GetAxis("Horizontal");
         moveVertical = Input.GetAxis("Vertical");
 
+        if (moveHorizontal != 0f) movehor = true;
+        else movehor = false;
+        if (moveVertical != 0f) movever = true;
+        else movever = false;
+        
+        if (movehor || movever) _animator.SetBool("moving", true); 
+        else _animator.SetBool("moving", false); 
+        
         var dir = Camera.main.WorldToScreenPoint(transform.position);
         mousePos = Input.mousePosition - dir;
     }

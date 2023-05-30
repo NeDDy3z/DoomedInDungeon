@@ -3,6 +3,7 @@ using System.Numerics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Vector3 = UnityEngine.Vector3;
 
 public class GameManager : MonoBehaviour
@@ -21,8 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private PlayerController _playerController;
 
-    public int levelNumber = 0;
-
+    public bool playing;
+    
     private bool sound = true;
     private bool music = true;
 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         UIToggle();
         mainMenu.gameObject.SetActive(true);
+        if (playing) mainMenu.gameObject.SetActive(false);
     }
 
     void Update()
@@ -104,11 +106,6 @@ public class GameManager : MonoBehaviour
         levels.gameObject.SetActive(true);
     }
 
-    public void LevelChoice(int lvl)
-    {
-        levelNumber = lvl;
-    }
-
     public void Options()
     {
         gameState = GameState.Options;
@@ -131,6 +128,11 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
     }
 
+    public void End()
+    {
+        
+    }
+    
     public void Pause()
     {
         switch (gameState)
