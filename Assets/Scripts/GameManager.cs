@@ -22,8 +22,6 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private PlayerController _playerController;
 
-    public bool playing;
-    
     private bool sound = true;
     private bool music = true;
 
@@ -42,7 +40,6 @@ public class GameManager : MonoBehaviour
     {
         UIToggle();
         mainMenu.gameObject.SetActive(true);
-        if (playing) mainMenu.gameObject.SetActive(false);
     }
 
     void Update()
@@ -67,9 +64,13 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    public void NextLevel(int levelNumber)
+    public void NextLevel()
     {
-        Debug.Log("Level " + levelNumber + " entered.");
+        UIToggle();
+        gui.gameObject.SetActive(true);
+        gameState = GameState.Game;
+        
+        Debug.Log("Next level entered");
     }
     
     public void StartGame()

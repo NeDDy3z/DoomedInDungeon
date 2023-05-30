@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,22 @@ public class UIManager : MonoBehaviour
         coinsAmount.text = coins.ToString();
     }
 
-    
+
+    void LoadData()
+    {
+        
+    }
+
+    void SaveData()
+    {
+        string path = Application.persistentDataPath + "/savegame.dat";
+        FileStream stream = new FileStream(path, FileMode.Create);
+        
+        byte[] data = System.Text.Encoding.UTF8.GetBytes("lol");
+        stream.Write(data, 0, data.Length);
+        
+        stream.Close();
+    }
     
     public void UpdateData()
     {
@@ -44,7 +60,10 @@ public class UIManager : MonoBehaviour
         if (hp >= oldHp)
         {
             int temp = Convert.ToInt32(hp) - Convert.ToInt32(oldHp);
-            hpText.text = "+"+ ((int)oldHp - (int)hp);
+
+            if (temp >= 0) hpText.text = "+" + temp;
+            else hpText.text = "-" + temp;
+            
             hpText.color = Color.green;
         }
         else
