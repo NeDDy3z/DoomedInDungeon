@@ -23,8 +23,15 @@ public class WeaponAim : MonoBehaviour
             var angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (mousePos.x < 0) transform.localScale = new Vector3(1, -1, 1);
-            if (mousePos.x > 0) transform.localScale = new Vector3(1, 1, 1);
+            if (mousePos.x < 0)
+            {
+                transform.localScale = new Vector3(1, -1, 1);
+            }
+
+            if (mousePos.x > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 }

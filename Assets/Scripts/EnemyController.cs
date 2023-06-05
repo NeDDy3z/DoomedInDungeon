@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     public Animator _animator;
 
     public GameObject weapon;
+    private WeaponController _weaponController;
     private Animator weaponAnim;
 
     private Rigidbody2D rb;
@@ -37,7 +38,17 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         _playerDetection = gameObject.GetComponent<PlayerDetection>();
 
-        if (weapon != null) weaponAnim = weapon.GetComponent<Animator>();
+        _weaponController = weapon.transform.transform.GetComponent<WeaponController>();
+        
+        if (weapon != null)
+        {
+            weaponAnim = weapon.GetComponent<Animator>();
+        }
+        
+        if (_enemyType == EnemyType.Minion_Medium)
+        {
+            InvokeRepeating("Fire", 2f, 2f);
+        }
     }
 
     private void FixedUpdate()
@@ -49,37 +60,60 @@ public class EnemyController : MonoBehaviour
             transform.position =
                 Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
-            if (transform.position.x < oldPos.x) transform.localRotation = Quaternion.Euler(0, 180, 0);
-            else if (transform.position.x > oldPos.x) transform.localRotation = Quaternion.Euler(0, 0, 0);
+            if (transform.position.x < oldPos.x)
+            {
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (transform.position.x > oldPos.x)
+            {
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
         }
-
-        if (transform.position != oldPos) _animator.SetBool("Moving", true);
-        else if (transform.position == oldPos) _animator.SetBool("Moving", false);
-
-        /*
-        if (Vector2.Distance(transform.position, player.transform.position) < minimumDistance)
+        
+        if (transform.position != oldPos)
         {
+            _animator.SetBool("Moving", true);
         }
-        */
+        else if (transform.position == oldPos)
+        {
+            _animator.SetBool("Moving", false);
+        }
     }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
         //melee
-        if (col.gameObject.tag == "Player") weaponAnim.SetBool("Attack", true);
+        if (col.gameObject.tag == "Player")
+        {
+            weaponAnim.SetBool("Attack", true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player") weaponAnim.SetBool("Attack", false);
+        if (col.gameObject.tag == "Player")
+        {
+            weaponAnim.SetBool("Attack", false);
+        }
     }
 
-    
+
+    private void Fire()
+    {
+        if (_playerDetection.playerVisible)
+        {
+            _weaponController.Fire();
+            Debug.Log("Enemy fired");
+        }
+    }
 
     public void Damage(float amount)
     {
         hp -= amount;
-        if (hp <= 0) Death();
+        if (hp <= 0)
+        {
+            Death();
+        }
     }
 
     private void Death()

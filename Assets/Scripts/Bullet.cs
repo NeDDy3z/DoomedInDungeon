@@ -26,18 +26,22 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "WallCollision") Destroy(transform.gameObject); //runs into wall, it destroys itself
+        if (col.gameObject.tag == "WallCollision") {
+            Destroy(transform.gameObject); //runs into wall, it destroys itself
+        }
 
         if (col.gameObject.tag == "HitboxPlayer" && _firedBy == FiredBy.Enemy)
         {
             _playerController.Damage(damage);
             Destroy(transform.gameObject);
+            Debug.Log("Bullet hit player");
         }
 
         if (col.gameObject.tag == "HitboxEnemy" && _firedBy == FiredBy.Player)
         {
             col.gameObject.transform.parent.GetComponent<EnemyController>().Damage(damage);
             Destroy(transform.gameObject);
+            Debug.Log("Bullet hit enemy");
         }
     }
 }

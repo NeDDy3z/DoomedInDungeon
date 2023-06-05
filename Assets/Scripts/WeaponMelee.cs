@@ -6,7 +6,6 @@ using UnityEngine;
 public class WeaponMelee : MonoBehaviour
 {
     public float damage;
-    public Animator _animator;
 
     private BoxCollider2D meeleWeaponCollider;
 
@@ -26,6 +25,10 @@ public class WeaponMelee : MonoBehaviour
 
     public void Hit()
     {
-        if (_playerController.hp > 0) _playerController.Damage(damage);
+        if (_playerController.hp > 0)
+        {
+            _playerController.Damage(damage);
+            Debug.Log("Player hit by enemy");
+        }
     }
 }

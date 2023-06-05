@@ -16,6 +16,7 @@ public class PlayerDetection : MonoBehaviour
     private GameObject player;
 
 
+    
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -44,11 +45,20 @@ public class PlayerDetection : MonoBehaviour
 
             float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
-            if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
+            if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget,
+                    obstructionLayer))
+            {
                 playerVisible = true;
-            else playerVisible = false;
+            }
+            else
+            {
+                playerVisible = false;
+            }
         }
-        else if (playerVisible) playerVisible = false;
+        else if (playerVisible)
+        {
+            playerVisible = false;
+        }
     }
 
     private void OnDrawGizmos()

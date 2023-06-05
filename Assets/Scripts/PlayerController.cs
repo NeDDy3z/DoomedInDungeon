@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 2f;
 
     public GameObject character;
-    public GameObject weapon;
     public Animator _animator;
     
     private Rigidbody2D rb;
@@ -23,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos;
 
     private UIManager _uiManager;
+    private GameManager _gameController;
 
     private bool movehor;
     private bool movever;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         _uiManager = GameObject.FindWithTag("GameController").gameObject.transform.GetChild(0)
             .GetComponent<UIManager>();
+        _gameController = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -39,13 +40,32 @@ public class PlayerController : MonoBehaviour
         moveHorizontal = Input.GetAxis("Horizontal");
         moveVertical = Input.GetAxis("Vertical");
 
-        if (moveHorizontal != 0f) movehor = true;
-        else movehor = false;
-        if (moveVertical != 0f) movever = true;
-        else movever = false;
-        
-        if (movehor || movever) _animator.SetBool("moving", true); 
-        else _animator.SetBool("moving", false); 
+        if (moveHorizontal != 0f)
+        {
+            movehor = true;
+        }
+        else
+        {
+            movehor = false;
+        }
+
+        if (moveVertical != 0f)
+        {
+            movever = true;
+        }
+        else
+        {
+            movever = false;
+        }
+
+        if (movehor || movever)
+        {
+            _animator.SetBool("moving", true);
+        }
+        else
+        {
+            _animator.SetBool("moving", false);
+        } 
         
         var dir = Camera.main.WorldToScreenPoint(transform.position);
         mousePos = Input.mousePosition - dir;
@@ -57,10 +77,20 @@ public class PlayerController : MonoBehaviour
             moveHorizontal * Time.deltaTime * movementSpeed,
             moveVertical * Time.deltaTime * movementSpeed, 0);
 
-        if (!freeze) rb.MovePosition(transform.position += moveInput);
+        if (!freeze)
+        {
+            rb.MovePosition(transform.position += moveInput);
+        }
 
-        if (mousePos.x < 0) character.transform.localRotation = Quaternion.Euler(0, 180f, 0);
-        if (mousePos.x > 0) character.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        if (mousePos.x < 0)
+        {
+            character.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+        }
+
+        if (mousePos.x > 0)
+        {
+            character.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     public void Freeze(bool choice)
@@ -82,26 +112,36 @@ public class PlayerController : MonoBehaviour
     
     public void Heal(float amount)
     {
-        if (hp < maxHp) hp += amount;
-        if (hp > maxHp) hp -= hp - maxHp;
+        if (hp < maxHp)
+        {
+            hp += amount;
+        }
+
+        if (hp > maxHp)
+        {
+            hp -= hp - maxHp;
+        }
         _uiManager.UpdateHP();
         
-        Debug.Log("Heal: +" + amount);
+        Debug.Log("Healed: +" + amount);
     }
 
     public void Damage(float amount)
     {
         hp -= amount;
-        if (hp <= 0) Died();
+        if (hp <= 0)
+        {
+            Died();
+        }
         _uiManager.UpdateHP();
         
-        Debug.Log("Damage: -" + amount);
+        Debug.Log("Damaged: -" + amount);
     }
 
     private void Died()
     {
-        Debug.Log("Death");
         GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
+        Debug.Log("Player died");
     }
     
     public void AddCoins(float amount)

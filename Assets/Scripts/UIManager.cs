@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     {
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         coinsAmount.text = coins.ToString();
+
+        maxHp = 200;
     }
 
 
@@ -85,8 +87,13 @@ public class UIManager : MonoBehaviour
         
         coins = _playerController.coins;
         if (coins > oldCoins)
+        {
             coinsText.text = "+" + (Convert.ToInt32(coins) - Convert.ToInt32(oldCoins));
-        else coinsText.text = "-" + (Convert.ToInt32(oldCoins) - Convert.ToInt32(coins));
+        }
+        else
+        {
+            coinsText.text = "-" + (Convert.ToInt32(oldCoins) - Convert.ToInt32(coins));
+        }
         oldCoins = coins;
         
         hpText.CrossFadeAlpha(1, 0, false);

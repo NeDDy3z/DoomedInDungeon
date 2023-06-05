@@ -38,14 +38,28 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        UIToggle();
-        mainMenu.gameObject.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            UIToggle();
+            mainMenu.gameObject.SetActive(true);
+        }
+        else
+        {
+            NextLevel();
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Pause();
-        if (Input.GetKeyDown(KeyCode.K)) Death();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Death();
+        }
     }
 
     void UIToggle()
@@ -64,16 +78,16 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    public void NextLevel()
+    public void StartGame()
     {
-        UIToggle();
-        gui.gameObject.SetActive(true);
-        gameState = GameState.Game;
-        
-        Debug.Log("Next level entered");
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            Debug.Log("Game started");
+        }
     }
     
-    public void StartGame()
+    public void NextLevel()
     {
         gameState = GameState.Game;
         
@@ -86,10 +100,10 @@ public class GameManager : MonoBehaviour
         _playerController.SetMaxHP();
         
         Time.timeScale = 1;
-        Debug.Log("Game started");
+        
+        Debug.Log("Next level entered");
     }
     
-
     #region UI
     public void Menu()
     {
@@ -149,6 +163,12 @@ public class GameManager : MonoBehaviour
                 pauseMenu.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 break;
+            
+            default:
+                gameState = GameState.Pause;
+                pauseMenu.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                break;
         }
     }
 
@@ -165,7 +185,15 @@ public class GameManager : MonoBehaviour
     {
         sound = !sound;
 
-        string temp = sound == true ? "On" : "Off";
+        string temp;
+        if (sound)
+        {
+            temp = "On";
+        }
+        else
+        {
+            temp = "Off";
+        }
         GameObject.Find("soundBtnText").GetComponent<TextMeshProUGUI>().text = temp;
     }
 
@@ -173,7 +201,15 @@ public class GameManager : MonoBehaviour
     {
         music = !music;
 
-        string temp = music == true ? "On" : "Off";
+        string temp;
+        if (music)
+        {
+            temp = "On";
+        }
+        else
+        {
+            temp = "Off";
+        }
         GameObject.Find("musicBtnText").GetComponent<TextMeshProUGUI>().text = temp;
     }
 

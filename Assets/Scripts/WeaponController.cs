@@ -30,7 +30,11 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) Fire();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Fire();
+            Debug.Log("Player fired");
+        }
     }
     
     public void Fire()
@@ -44,15 +48,21 @@ public class WeaponController : MonoBehaviour
                 .AddForce(shootingPoint.right * bulletSpeed, ForceMode2D.Impulse);
 
             Bullet projectileBullet = projectile.GetComponent<Bullet>();
-            
+
             if (gameObject.transform.parent.parent.parent.tag == "Player")
+            {
                 projectileBullet._firedBy = Bullet.FiredBy.Player;
-            else projectileBullet._firedBy = Bullet.FiredBy.Enemy;
+            }
+            else
+            {
+                projectileBullet._firedBy = Bullet.FiredBy.Enemy;
+            }
             
             projectileBullet.damage = damage;
             projectileBullet.speed = bulletSpeed;
-
             
         }
     }
+    
+    
 }
