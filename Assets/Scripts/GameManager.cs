@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Debug.Log("ACTIVE SCENE: "+ SceneManager.GetActiveScene().buildIndex);
+        
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             UIOff();
@@ -47,7 +48,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            NextLevel();
+            gameState = GameState.Game;
+        
+            UIOff();
+            gui.gameObject.SetActive(true);
+        
+            _playerController = player.GetComponent<PlayerController>();
+            _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
+            _playerController.SetMaxHP();
+        
+            Time.timeScale = 1;
+        
+            Debug.Log("Next level entered");
         }
     }
 
@@ -80,29 +92,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
         Debug.Log("Game started");
-    }
-    
-    public void NextLevel()
-    {
+        
         gameState = GameState.Game;
-        
-        UIOff();
-        gui.gameObject.SetActive(true);
-        
-        _playerController = player.GetComponent<PlayerController>();
-        _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
-        _playerController.SetMaxHP();
-        
+        pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1;
-        
-        Debug.Log("Next level entered");
     }
     
+    
+
     #region UI
     public void Menu()
     {
         gameState = GameState.Menu;
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        
+        UIOff();
+        mainMenu.gameObject.SetActive(true);
     }
 
     public void Levels()
@@ -163,8 +167,6 @@ public class GameManager : MonoBehaviour
         UIOff();
         gameState = GameState.Death;
         death.gameObject.SetActive(true);
-        
-        Time.timeScale = 0;
     }
 
     public void Sound()

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MapSwitcher : MonoBehaviour
+public class LevelEnd : MonoBehaviour
 {
     private GameManager _gameManager;
     private PlayerController _playerController;
@@ -19,6 +19,7 @@ public class MapSwitcher : MonoBehaviour
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
+    //Map End
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "HitboxPlayer")
@@ -31,7 +32,8 @@ public class MapSwitcher : MonoBehaviour
             {
                 SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
             }
-            Debug.Log("Player entered end hitbox");
+            Debug.Log("Player entered end of level");
         }
     }
+    
 }
