@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         coins += amount;
         _uiManager.UpdateCoins();
         
-        Debug.Log("Coins: +" + amount);
+        Debug.Log("Coins "+ (coins - amount) +": +" + amount +" = "+ coins);
     }
 
     public void SubtractCoins(float amount)

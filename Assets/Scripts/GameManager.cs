@@ -33,14 +33,16 @@ public class GameManager : MonoBehaviour
         Levels,
         Options,
         Credits,
+        Trading,
         Death
     }
 
     void Start()
     {
+        Debug.Log("ACTIVE SCENE: "+ SceneManager.GetActiveScene().buildIndex);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            UIToggle();
+            UIOff();
             mainMenu.gameObject.SetActive(true);
         }
         else
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void UIToggle()
+    void UIOff()
     {
         mainMenu.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
@@ -74,28 +76,20 @@ public class GameManager : MonoBehaviour
         gui.gameObject.SetActive(false);
     }
 
-    public void BtnColor()
-    {
-    }
-
     public void StartGame()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
-            Debug.Log("Game started");
-        }
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        Debug.Log("Game started");
     }
     
     public void NextLevel()
     {
         gameState = GameState.Game;
         
-        UIToggle();
+        UIOff();
         gui.gameObject.SetActive(true);
         
         _playerController = player.GetComponent<PlayerController>();
-
         _playerController.transform.position = new Vector3(0f, 0.075f, 0f);
         _playerController.SetMaxHP();
         
@@ -108,16 +102,14 @@ public class GameManager : MonoBehaviour
     public void Menu()
     {
         gameState = GameState.Menu;
-        
-        UIToggle();
-        mainMenu.SetActive(true);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     public void Levels()
     {
         gameState = GameState.Levels;
         
-        UIToggle();
+        UIOff();
         levels.gameObject.SetActive(true);
     }
 
@@ -125,7 +117,7 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.Options;
         
-        UIToggle();
+        UIOff();
         options.gameObject.SetActive(true);
     }
 
@@ -133,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.Credits;
         
-        UIToggle();
+        UIOff();
         credits.gameObject.SetActive(true);
     }
 
@@ -163,18 +155,12 @@ public class GameManager : MonoBehaviour
                 pauseMenu.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 break;
-            
-            default:
-                gameState = GameState.Pause;
-                pauseMenu.gameObject.SetActive(true);
-                Time.timeScale = 0;
-                break;
         }
     }
 
     public void Death()
     {
-        UIToggle();
+        UIOff();
         gameState = GameState.Death;
         death.gameObject.SetActive(true);
         

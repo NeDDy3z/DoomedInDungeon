@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7729176063060099420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7729176063060099417}
+  damage: 0
+  speed: 0
+  _firedBy: 0
 --- !u!212 &7729176063060099416
 SpriteRenderer:
   m_ObjectHideFlags: 0

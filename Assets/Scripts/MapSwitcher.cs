@@ -23,14 +23,13 @@ public class MapSwitcher : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "HitboxPlayer")
         {
-            if (sceneBuildIndex == 999)
+            if (sceneBuildIndex == 6)
             {
                 _gameManager.End();
             }
             else
             {
                 SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
-                _gameManager.NextLevel();
             }
             Debug.Log("Player entered end hitbox");
         }

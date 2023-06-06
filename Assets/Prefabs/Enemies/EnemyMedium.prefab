@@ -196,7 +196,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   radius: 2.5
-  showRadius: 0
+  showRadius: 1
 --- !u!212 &7733998962899420203
 SpriteRenderer:
   m_ObjectHideFlags: 0

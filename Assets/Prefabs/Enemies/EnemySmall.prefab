@@ -149,7 +149,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   radius: 2.5
-  showRadius: 0
+  showRadius: 1
 --- !u!212 &7733998962899420203
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -334,7 +334,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  _animator: {fileID: 7733998963851394914}
 --- !u!212 &7733998963851394924
 SpriteRenderer:
   m_ObjectHideFlags: 0

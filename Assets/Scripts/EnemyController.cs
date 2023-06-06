@@ -49,6 +49,11 @@ public class EnemyController : MonoBehaviour
         {
             InvokeRepeating("Fire", 2f, 2f);
         }
+
+        if (_enemyType == EnemyType.Minion_Large)
+        {
+            InvokeRepeating("Fire", 2f, 5f);
+        }
     }
 
     private void FixedUpdate()

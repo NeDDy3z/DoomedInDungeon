@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
         coinsAmount.text = coins.ToString();
 
         maxHp = 200;
+        coins = 0;
     }
 
 
@@ -83,6 +84,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoins()
     {
+        coinsAmount.text = coins.ToString();
         coinsAmount.text = coins.ToString();
         
         coins = _playerController.coins;
