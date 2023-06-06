@@ -7,7 +7,7 @@ public class TraderController : MonoBehaviour
 
     private GameManager _gameManager;
     
-    private bool tradable;
+    private bool tradable = false;
     
     void Start()
     {
@@ -17,30 +17,18 @@ public class TraderController : MonoBehaviour
 
     private void Update()
     {
-        if (tradable)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                tradingUi.SetActive(true);
-                _gameManager.gameState = GameManager.GameState.Trading;
-            }
-        }
-        
-        if (_gameManager.gameState == GameManager.GameState.Trading && Input.GetKeyDown(KeyCode.E))
-        {
-            tradingUi.SetActive(false);
-            _gameManager.gameState = GameManager.GameState.Game;
-        }
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        tradable = true;
+        tradingUi.SetActive(true);
+        _gameManager.gameState = GameManager.GameState.Trading;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        tradable = false;
+        tradingUi.SetActive(false);
+        _gameManager.gameState = GameManager.GameState.Game;
     }
 }
