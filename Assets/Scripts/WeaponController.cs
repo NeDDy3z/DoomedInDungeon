@@ -21,8 +21,8 @@ public class WeaponController : MonoBehaviour
         Rifle,
         Shotgun
     }
-
-    void Start()
+    
+    void Awake()
     {
         _gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
     }
@@ -45,7 +45,7 @@ public class WeaponController : MonoBehaviour
             
             projectile.GetComponent<Rigidbody2D>()
                 .AddForce(shootingPoint.right * bulletSpeed, ForceMode2D.Impulse);
-
+            
             Bullet projectileBullet = projectile.GetComponent<Bullet>();
 
             if (gameObject.transform.parent.parent.parent.tag == "Player")
@@ -59,7 +59,6 @@ public class WeaponController : MonoBehaviour
             
             projectileBullet.damage = damage;
             projectileBullet.speed = bulletSpeed;
-            
         }
     }
     

@@ -26,53 +26,45 @@ public class UIManager : MonoBehaviour
     {
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         coinsAmount.text = coins.ToString();
-
-        maxHp = 200;
-        coins = 0;
-    }
-
-
-    void LoadData()
-    {
         
-    }
-
-    void SaveData()
-    {
-        string path = Application.persistentDataPath + "/savegame.dat";
-        FileStream stream = new FileStream(path, FileMode.Create);
-        
-        byte[] data = System.Text.Encoding.UTF8.GetBytes("lol");
-        stream.Write(data, 0, data.Length);
-        
-        stream.Close();
+        UpdateNewData();
+        UpdateOldData();
     }
     
-    public void UpdateData()
+    
+    
+    public void UpdateNewData()
     {
         hp = _playerController.hp;
-        oldHp = hp;
-        maxHp = _playerController.maxHp;
         coins = _playerController.coins;
-        oldCoins = coins;
+
+        Debug.Log("HP: "+ hp +"\nCoins: "+ coins);
     }
+    
+    public void UpdateOldData()
+    {
+        oldHp = hp;
+        oldCoins = coins;
+        
+        Debug.Log("HP: "+ hp +"\nCoins: "+ coins);
+    }
+    
 
     public void UpdateHP()
     {
-        hp = _playerController.hp;
+        UpdateNewData();
+        
         if (hp >= oldHp)
         {
+            hpText.color = Color.green;
             int temp = Convert.ToInt32(hp) - Convert.ToInt32(oldHp);
 
-            if (temp >= 0) hpText.text = "+" + temp;
-            else hpText.text = "-" + temp;
-            
-            hpText.color = Color.green;
+            hpText.text = "+" + temp;
         }
-        else
+        else if (hp <= oldHp)
         {
-            hpText.text = (Convert.ToInt32(hp) - Convert.ToInt32(oldHp)).ToString();
             hpText.color = Color.red;
+            hpText.text = (Convert.ToInt32(hp) - Convert.ToInt32(oldHp)).ToString();
         }
         oldHp = hp;
         
@@ -80,10 +72,14 @@ public class UIManager : MonoBehaviour
         
         hpText.CrossFadeAlpha(1, 0, false);
         hpText.CrossFadeAlpha(0, 5, true);
+        
+        UpdateOldData();
     }
 
     public void UpdateCoins()
     {
+        UpdateNewData();
+        
         coinsAmount.text = coins.ToString();
         coinsAmount.text = coins.ToString();
         
@@ -100,6 +96,8 @@ public class UIManager : MonoBehaviour
         
         hpText.CrossFadeAlpha(1, 0, false);
         hpText.CrossFadeAlpha(0, 5, true);
+        
+        UpdateOldData();
     }
     
 }

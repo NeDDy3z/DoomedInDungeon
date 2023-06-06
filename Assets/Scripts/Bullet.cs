@@ -10,7 +10,8 @@ public class Bullet : MonoBehaviour
     public float damage;
     public float speed;
     public FiredBy _firedBy;
-    
+
+
     private PlayerController _playerController;
 
     public enum FiredBy
@@ -19,14 +20,17 @@ public class Bullet : MonoBehaviour
         Enemy
     }
 
-    void Start()
+    void Awake()
     {
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        
+        Debug.Log("Damaga: "+ damage +" Fired By: "+ _firedBy);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "WallCollision") {
+        if (col.gameObject.tag == "WallCollision")
+        {
             Destroy(transform.gameObject); //runs into wall, it destroys itself
         }
 

@@ -105,22 +105,20 @@ public class PlayerController : MonoBehaviour
     public void SetMaxHP()
     {
         hp = maxHp;
-        _uiManager.UpdateData();
+        _uiManager.UpdateHP();
 
         Debug.Log("HP set to max");
     }
     
     public void Heal(float amount)
     {
-        if (hp < maxHp)
-        {
-            hp += amount;
-        }
-
+        hp += amount;
+        
         if (hp > maxHp)
         {
             hp -= hp - maxHp;
         }
+        
         _uiManager.UpdateHP();
         
         Debug.Log("Healed: +" + amount);

@@ -14,8 +14,8 @@ public class PlayerDetection : MonoBehaviour
     public bool showRadius;
 
     private GameObject player;
-
-
+    
+    
     
     void Start()
     {
@@ -25,7 +25,7 @@ public class PlayerDetection : MonoBehaviour
 
     private IEnumerator PlayerLocator()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
 
         while (true)
         {

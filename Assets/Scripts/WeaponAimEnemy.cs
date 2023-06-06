@@ -5,8 +5,7 @@ using UnityEngine;
 public class WeaponAimEnemy : MonoBehaviour
 {
     public EnemyController _enemyController;
-    public GameObject weapon;
-    
+
     private GameManager _gameManager;
     private GameObject player;
 
@@ -28,16 +27,16 @@ public class WeaponAimEnemy : MonoBehaviour
             {
                 Vector3 direction = player.transform.position - transform.position;
                 var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                weapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             
                 if (direction.x < 0)
                 {
-                    weapon.transform.localScale = new Vector3(1, -1, 1);
+                    transform.localScale = new Vector3(1, -1, 1);
                 }
 
                 if (direction.x > 0)
                 {
-                    weapon.transform.localScale = new Vector3(1, 1, 1);
+                    transform.localScale = new Vector3(1, 1, 1);
                 }
             }
         }

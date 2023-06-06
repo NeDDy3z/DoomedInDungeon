@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private PlayerDetection _playerDetection;
 
-    void Start()
+    void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
 
@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
         _playerDetection = gameObject.GetComponent<PlayerDetection>();
 
         _weaponController = weapon.transform.transform.GetComponent<WeaponController>();
-        
+
         if (weapon != null)
         {
             weaponAnim = weapon.GetComponent<Animator>();
@@ -47,12 +47,12 @@ public class EnemyController : MonoBehaviour
         
         if (_enemyType == EnemyType.Minion_Medium)
         {
-            InvokeRepeating("Fire", 2f, 2f);
+            InvokeRepeating("EnemyFire", 2f, 2f);
         }
 
         if (_enemyType == EnemyType.Minion_Large)
         {
-            InvokeRepeating("Fire", 2f, 5f);
+            InvokeRepeating("EnemyFire", 2f, 5f);
         }
     }
 
@@ -103,7 +103,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private void Fire()
+    private void EnemyFire()
     {
         if (_playerDetection.playerVisible)
         {

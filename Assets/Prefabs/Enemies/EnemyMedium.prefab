@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyController: {fileID: 7733998962899420208}
-  weapon: {fileID: 799288188486194201}
 --- !u!1 &7733998962899420201
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +339,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2844875493976760809}
     m_Modifications:
+    - target: {fileID: 129539482506836608, guid: 832328e34938c03459636850e926bab3, type: 3}
+      propertyPath: _weaponOf
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129539482506836608, guid: 832328e34938c03459636850e926bab3, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 7729176063060099420, guid: cbf393bf6edcba94bbb4a51e3941a5fa, type: 3}
     - target: {fileID: 6653947787322499158, guid: 832328e34938c03459636850e926bab3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.004
@@ -398,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7498468672223587871, guid: 832328e34938c03459636850e926bab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: 0.1389
       objectReference: {fileID: 0}
     - target: {fileID: 7498468672223587871, guid: 832328e34938c03459636850e926bab3, type: 3}
       propertyPath: m_LocalPosition.y
