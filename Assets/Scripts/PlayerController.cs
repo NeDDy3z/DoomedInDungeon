@@ -4,158 +4,162 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-public class PlayerController : MonoBehaviour
+namespace Scripts
 {
-    public float hp;
-    public float maxHp;
-    public float coins;
-    public float movementSpeed = 2f;
-
-    public GameObject character;
-    public Animator _animator;
-    
-    private Rigidbody2D rb;
-
-    private bool freeze;
-    private float moveHorizontal;
-    private float moveVertical;
-    private Vector3 mousePos;
-
-    private UIManager _uiManager;
-    private GameManager _gameController;
-
-    private bool movehor;
-    private bool movever;
-    
-    private void Start()
+    public class PlayerController : MonoBehaviour
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        _uiManager = GameObject.FindWithTag("GameController").gameObject.transform.GetChild(0)
-            .GetComponent<UIManager>();
-        _gameController = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-    }
+        public float hp;
+        public float maxHp;
+        public float coins;
+        public float movementSpeed = 2f;
 
-    private void Update()
-    {
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
+        public GameObject character;
+        public Animator _animator;
 
-        if (moveHorizontal != 0f)
+        private Rigidbody2D rb;
+
+        private bool freeze;
+        private float moveHorizontal;
+        private float moveVertical;
+        private Vector3 mousePos;
+
+        private UIManager _uiManager;
+        private GameManager _gameController;
+
+        private bool movehor;
+        private bool movever;
+
+        private void Start()
         {
-            movehor = true;
-        }
-        else
-        {
-            movehor = false;
+            rb = gameObject.GetComponent<Rigidbody2D>();
+            _uiManager = GameObject.FindWithTag("GameController").gameObject.transform.GetChild(0)
+                .GetComponent<UIManager>();
+            _gameController = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         }
 
-        if (moveVertical != 0f)
+        private void Update()
         {
-            movever = true;
-        }
-        else
-        {
-            movever = false;
-        }
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
 
-        if (movehor || movever)
-        {
-            _animator.SetBool("moving", true);
-        }
-        else
-        {
-            _animator.SetBool("moving", false);
-        } 
-        
-        var dir = Camera.main.WorldToScreenPoint(transform.position);
-        mousePos = Input.mousePosition - dir;
-    }
+            if (moveHorizontal != 0f)
+            {
+                movehor = true;
+            }
+            else
+            {
+                movehor = false;
+            }
 
-    void FixedUpdate()
-    {
-        Vector3 moveInput = new Vector3(
-            moveHorizontal * Time.deltaTime * movementSpeed,
-            moveVertical * Time.deltaTime * movementSpeed, 0);
+            if (moveVertical != 0f)
+            {
+                movever = true;
+            }
+            else
+            {
+                movever = false;
+            }
 
-        if (!freeze)
-        {
-            rb.MovePosition(transform.position += moveInput);
-        }
+            if (movehor || movever)
+            {
+                _animator.SetBool("moving", true);
+            }
+            else
+            {
+                _animator.SetBool("moving", false);
+            }
 
-        if (mousePos.x < 0)
-        {
-            character.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+            var dir = Camera.main.WorldToScreenPoint(transform.position);
+            mousePos = Input.mousePosition - dir;
         }
 
-        if (mousePos.x > 0)
+        void FixedUpdate()
         {
-            character.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            Vector3 moveInput = new Vector3(
+                moveHorizontal * Time.deltaTime * movementSpeed,
+                moveVertical * Time.deltaTime * movementSpeed, 0);
+
+            if (!freeze)
+            {
+                rb.MovePosition(transform.position += moveInput);
+            }
+
+            if (mousePos.x < 0)
+            {
+                character.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+            }
+
+            if (mousePos.x > 0)
+            {
+                character.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
         }
-    }
 
-    public void Freeze(bool choice)
-    {
-        freeze = choice;
-        
-        Debug.Log("Player frozen: "+ freeze);
-    }
-
-
-    
-    public void SetMaxHP()
-    {
-        hp = maxHp;
-        _uiManager.UpdateHP();
-
-        Debug.Log("HP set to max");
-    }
-    
-    public void Heal(float amount)
-    {
-        hp += amount;
-        
-        if (hp > maxHp)
+        public void Freeze(bool choice)
         {
-            hp -= hp - maxHp;
-        }
-        
-        _uiManager.UpdateHP();
-        
-        Debug.Log("Healed: +" + amount);
-    }
+            freeze = choice;
 
-    public void Damage(float amount)
-    {
-        hp -= amount;
-        if (hp <= 0)
+            Debug.Log("Player frozen: " + freeze);
+        }
+
+
+
+        public void SetMaxHP()
         {
-            Died();
+            hp = maxHp;
+            _uiManager.UpdateHP();
+
+            Debug.Log("HP set to max");
         }
-        _uiManager.UpdateHP();
-        
-        Debug.Log("Damaged: -" + amount);
-    }
 
-    private void Died()
-    {
-        GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
-        Debug.Log("Player died");
-    }
-    
-    public void AddCoins(float amount)
-    {
-        coins += amount;
-        _uiManager.UpdateCoins();
-        
-        Debug.Log("Coins "+ (coins - amount) +": +" + amount +" = "+ coins);
-    }
+        public void Heal(float amount)
+        {
+            hp += amount;
 
-    public void SubtractCoins(float amount)
-    {
-        coins -= amount;
-        _uiManager.UpdateCoins();
-        
-        Debug.Log("Coins: -" + amount);
+            if (hp > maxHp)
+            {
+                hp -= hp - maxHp;
+            }
+
+            _uiManager.UpdateHP();
+
+            Debug.Log("Healed: +" + amount);
+        }
+
+        public void Damage(float amount)
+        {
+            hp -= amount;
+            if (hp <= 0)
+            {
+                Died();
+            }
+
+            _uiManager.UpdateHP();
+
+            Debug.Log("Damaged: -" + amount);
+        }
+
+        private void Died()
+        {
+            GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
+            Debug.Log("Player died");
+        }
+
+        public void AddCoins(float amount)
+        {
+            coins += amount;
+            _uiManager.UpdateCoins();
+
+            Debug.Log("Coins " + (coins - amount) + ": +" + amount + " = " + coins);
+        }
+
+        public void SubtractCoins(float amount)
+        {
+            coins -= amount;
+            _uiManager.UpdateCoins();
+
+            Debug.Log("Coins: -" + amount);
+        }
+
     }
-    
 }

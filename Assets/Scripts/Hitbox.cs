@@ -3,34 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hitbox : MonoBehaviour
+
+
+namespace Scripts
 {
-    public enum Entity
+    public class Hitbox : MonoBehaviour
     {
-        Player,
-        Enemy
-    }
-
-    public Entity _entity;
-
-    private GameObject player;
-    private GameObject enemy;
-
-    private PlayerController _playerController;
-    private EnemyController _enemyController;
-
-
-    void Start()
-    {
-        if (_entity == Entity.Player)
+        public enum Entity
         {
-            player = GameObject.FindWithTag("Player");
-            _playerController = player.GetComponent<PlayerController>();
+            Player,
+            Enemy
         }
-        else
+
+        public Entity _entity;
+
+        private GameObject player;
+        private GameObject enemy;
+
+        private PlayerController _playerController;
+        private EnemyController _enemyController;
+
+
+        void Start()
         {
-            enemy = transform.gameObject;
-            _enemyController = enemy.GetComponent<EnemyController>();
+            if (_entity == Entity.Player)
+            {
+                player = GameObject.FindWithTag("Player");
+                _playerController = player.GetComponent<PlayerController>();
+            }
+            else
+            {
+                enemy = transform.gameObject;
+                _enemyController = enemy.GetComponent<EnemyController>();
+            }
         }
+        
     }
 }

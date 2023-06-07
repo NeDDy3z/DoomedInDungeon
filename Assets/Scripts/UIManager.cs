@@ -6,98 +6,105 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+
+
+namespace Scripts
 {
-    public Image hpImg;
-    public TextMeshProUGUI hpText;
-
-    public TextMeshProUGUI coinsAmount;
-    public TextMeshProUGUI coinsText;
-
-    private PlayerController _playerController;
-    private float hp;
-    private float oldHp;
-    private float maxHp;
-    private float coins;
-    private float oldCoins;
-
-    // Start is called before the first frame update
-    void Start()
+    public class UIManager : MonoBehaviour
     {
-        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        coinsAmount.text = coins.ToString();
-        
-        UpdateNewData();
-        UpdateOldData();
-    }
-    
-    
-    
-    public void UpdateNewData()
-    {
-        hp = _playerController.hp;
-        coins = _playerController.coins;
+        public Image hpImg;
+        public TextMeshProUGUI hpText;
 
-        Debug.Log("HP: "+ hp +"\nCoins: "+ coins);
-    }
-    
-    public void UpdateOldData()
-    {
-        oldHp = hp;
-        oldCoins = coins;
-        
-        Debug.Log("HP: "+ hp +"\nCoins: "+ coins);
-    }
-    
+        public TextMeshProUGUI coinsAmount;
+        public TextMeshProUGUI coinsText;
 
-    public void UpdateHP()
-    {
-        UpdateNewData();
-        
-        if (hp >= oldHp)
+        private PlayerController _playerController;
+        private float hp;
+        private float oldHp;
+        private float maxHp;
+        private float coins;
+        private float oldCoins;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            hpText.color = Color.green;
-            int temp = Convert.ToInt32(hp) - Convert.ToInt32(oldHp);
+            _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            coinsAmount.text = coins.ToString();
 
-            hpText.text = "+" + temp;
+            UpdateNewData();
+            UpdateOldData();
         }
-        else if (hp <= oldHp)
-        {
-            hpText.color = Color.red;
-            hpText.text = (Convert.ToInt32(hp) - Convert.ToInt32(oldHp)).ToString();
-        }
-        oldHp = hp;
-        
-        hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
-        
-        hpText.CrossFadeAlpha(1, 0, false);
-        hpText.CrossFadeAlpha(0, 5, true);
-        
-        UpdateOldData();
-    }
 
-    public void UpdateCoins()
-    {
-        UpdateNewData();
-        
-        coinsAmount.text = coins.ToString();
-        coinsAmount.text = coins.ToString();
-        
-        coins = _playerController.coins;
-        if (coins > oldCoins)
+
+
+        public void UpdateNewData()
         {
-            coinsText.text = "+" + (Convert.ToInt32(coins) - Convert.ToInt32(oldCoins));
+            hp = _playerController.hp;
+            coins = _playerController.coins;
+
+            Debug.Log("HP: " + hp + "\nCoins: " + coins);
         }
-        else
+
+        public void UpdateOldData()
         {
-            coinsText.text = "-" + (Convert.ToInt32(oldCoins) - Convert.ToInt32(coins));
+            oldHp = hp;
+            oldCoins = coins;
+
+            Debug.Log("HP: " + hp + "\nCoins: " + coins);
         }
-        oldCoins = coins;
-        
-        hpText.CrossFadeAlpha(1, 0, false);
-        hpText.CrossFadeAlpha(0, 5, true);
-        
-        UpdateOldData();
+
+
+        public void UpdateHP()
+        {
+            UpdateNewData();
+
+            if (hp >= oldHp)
+            {
+                hpText.color = Color.green;
+                int temp = Convert.ToInt32(hp) - Convert.ToInt32(oldHp);
+
+                hpText.text = "+" + temp;
+            }
+            else if (hp <= oldHp)
+            {
+                hpText.color = Color.red;
+                hpText.text = (Convert.ToInt32(hp) - Convert.ToInt32(oldHp)).ToString();
+            }
+
+            oldHp = hp;
+
+            hpImg.rectTransform.sizeDelta = new Vector2(hp, 10);
+
+            hpText.CrossFadeAlpha(1, 0, false);
+            hpText.CrossFadeAlpha(0, 5, true);
+
+            UpdateOldData();
+        }
+
+        public void UpdateCoins()
+        {
+            UpdateNewData();
+
+            coinsAmount.text = coins.ToString();
+            coinsAmount.text = coins.ToString();
+
+            coins = _playerController.coins;
+            if (coins > oldCoins)
+            {
+                coinsText.text = "+" + (Convert.ToInt32(coins) - Convert.ToInt32(oldCoins));
+            }
+            else
+            {
+                coinsText.text = "-" + (Convert.ToInt32(oldCoins) - Convert.ToInt32(coins));
+            }
+
+            oldCoins = coins;
+
+            hpText.CrossFadeAlpha(1, 0, false);
+            hpText.CrossFadeAlpha(0, 5, true);
+
+            UpdateOldData();
+        }
+
     }
-    
 }

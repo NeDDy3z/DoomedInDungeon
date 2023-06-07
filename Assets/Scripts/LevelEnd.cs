@@ -5,35 +5,41 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelEnd : MonoBehaviour
+
+
+namespace Scripts
 {
-    private GameManager _gameManager;
-    private PlayerController _playerController;
-
-    public int sceneBuildIndex;
-    public bool Demo;
-
-    void Start()
+    public class LevelEnd : MonoBehaviour
     {
-        _gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-    }
+        private GameManager _gameManager;
+        private PlayerController _playerController;
 
-    //Map End
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "HitboxPlayer")
+        public int sceneBuildIndex;
+        public bool Demo;
+
+        void Start()
         {
-            if (sceneBuildIndex == 6)
-            {
-                _gameManager.End();
-            }
-            else
-            {
-                SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
-            }
-            Debug.Log("Player entered end of level");
+            _gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+            _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         }
+
+        //Map End
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.gameObject.tag == "Player" || col.gameObject.tag == "HitboxPlayer")
+            {
+                if (sceneBuildIndex == 6)
+                {
+                    _gameManager.End();
+                }
+                else
+                {
+                    SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+                }
+
+                Debug.Log("Player entered end of level");
+            }
+        }
+
     }
-    
 }

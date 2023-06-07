@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelSwitch : MonoBehaviour
+namespace Scripts
 {
-    public void SwitchToMap(int number)
+    public class LevelSwitch : MonoBehaviour
     {
-        SceneManager.LoadScene(number, LoadSceneMode.Single);
-        Debug.Log("User selected level "+ number +" from menu");
+        public void SwitchToMap(int number)
+        {
+            SceneManager.LoadScene(number, LoadSceneMode.Single);
+            Debug.Log("User selected level " + number + " from menu");
+        }
     }
 }

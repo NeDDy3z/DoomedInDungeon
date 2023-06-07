@@ -6,7 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Vector3 = UnityEngine.Vector3;
 
-public class GameManager : MonoBehaviour
+namespace Scripts
+{
+    public class GameManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject pauseMenu;
@@ -203,3 +205,5 @@ public class GameManager : MonoBehaviour
 
     #endregion
 }
+}
+

@@ -3,32 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMelee : MonoBehaviour
+
+
+namespace Scripts
 {
-    public float damage;
-
-    private BoxCollider2D meeleWeaponCollider;
-
-    private GameObject player;
-    private PlayerController _playerController;
-
-
-    // Start is called before the first frame update
-    void Awake()
-    { 
-        meeleWeaponCollider = gameObject.GetComponent<BoxCollider2D>();
-        
-        player = GameObject.FindWithTag("Player");
-        _playerController = player.GetComponent<PlayerController>();
-
-    }
-
-    public void Hit()
+    public class WeaponMelee : MonoBehaviour
     {
-        if (_playerController.hp > 0)
+        public float damage;
+
+        private BoxCollider2D meeleWeaponCollider;
+
+        private GameObject player;
+        private PlayerController _playerController;
+
+
+        // Start is called before the first frame update
+        void Awake()
         {
-            _playerController.Damage(damage);
-            Debug.Log("Player hit by enemy");
+            meeleWeaponCollider = gameObject.GetComponent<BoxCollider2D>();
+
+            player = GameObject.FindWithTag("Player");
+            _playerController = player.GetComponent<PlayerController>();
+
         }
+
+        public void Hit()
+        {
+            if (_playerController.hp > 0)
+            {
+                _playerController.Damage(damage);
+                Debug.Log("Player hit by enemy");
+            }
+        }
+        
     }
 }

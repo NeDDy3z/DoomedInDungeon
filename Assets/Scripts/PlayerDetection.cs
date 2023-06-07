@@ -3,75 +3,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDetection : MonoBehaviour
+namespace Scripts
 {
-    public bool playerVisible { get; private set; }
-
-    public LayerMask targetLayer;
-    public LayerMask obstructionLayer;
-
-    public float radius = 2.5f;
-    public bool showRadius;
-
-    private GameObject player;
-    
-    
-    
-    void Start()
+    public class PlayerDetection : MonoBehaviour
     {
-        player = GameObject.FindWithTag("Player");
-        StartCoroutine(PlayerLocator());
-    }
+        public bool playerVisible { get; private set; }
 
-    private IEnumerator PlayerLocator()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.1f);
+        public LayerMask targetLayer;
+        public LayerMask obstructionLayer;
 
-        while (true)
+        public float radius = 2.5f;
+        public bool showRadius;
+
+        private GameObject player;
+
+
+
+        void Start()
         {
-            yield return wait;
-            CheckIfPlayerInSight();
+            player = GameObject.FindWithTag("Player");
+            StartCoroutine(PlayerLocator());
         }
-    }
 
-    private void CheckIfPlayerInSight()
-    {
-        Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
-
-        if (rangeCheck.Length > 0)
+        private IEnumerator PlayerLocator()
         {
-            Transform target = rangeCheck[0].transform;
-            Vector2 directionToTarget = (target.position - transform.position).normalized;
+            WaitForSeconds wait = new WaitForSeconds(0.1f);
 
-            float distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-            if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget,
-                    obstructionLayer))
+            while (true)
             {
-                playerVisible = true;
+                yield return wait;
+                CheckIfPlayerInSight();
             }
-            else
+        }
+
+        private void CheckIfPlayerInSight()
+        {
+            Collider2D[] rangeCheck =
+                Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
+
+            if (rangeCheck.Length > 0)
+            {
+                Transform target = rangeCheck[0].transform;
+                Vector2 directionToTarget = (target.position - transform.position).normalized;
+
+                float distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget,
+                        obstructionLayer))
+                {
+                    playerVisible = true;
+                }
+                else
+                {
+                    playerVisible = false;
+                }
+            }
+            else if (playerVisible)
             {
                 playerVisible = false;
             }
         }
-        else if (playerVisible)
-        {
-            playerVisible = false;
-        }
-    }
 
-    private void OnDrawGizmos()
-    {
-        if (showRadius)
+        private void OnDrawGizmos()
         {
-            Gizmos.color = Color.white;
-            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
-
-            if (playerVisible)
+            if (showRadius)
             {
-                Gizmos.color = Color.green;
-                Gizmos.DrawLine(transform.position, player.transform.position);
+                Gizmos.color = Color.white;
+                UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
+
+                if (playerVisible)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawLine(transform.position, player.transform.position);
+                }
             }
         }
     }

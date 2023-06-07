@@ -4,43 +4,46 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class ObjectsController : MonoBehaviour
+namespace Scripts
 {
-    public int amount;
-
-    private GameObject player;
-    private PlayerController _playerController;
-
-
-    void Awake()
+    public class ObjectsController : MonoBehaviour
     {
-        player = GameObject.FindWithTag("Player");
-        _playerController = player.GetComponent<PlayerController>();
-    }
+        public int amount;
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player")
+        private GameObject player;
+        private PlayerController _playerController;
+
+
+        void Awake()
         {
-            if (gameObject.tag == "Damage")
-            {
-                _playerController.Damage(amount);
-                Debug.Log("Player picked up damage");
-            }
+            player = GameObject.FindWithTag("Player");
+            _playerController = player.GetComponent<PlayerController>();
+        }
 
-            if (gameObject.tag == "Heal")
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.gameObject.tag == "Player")
             {
-                _playerController.Heal(amount);
-                Debug.Log("Player picked up heal");
+                if (gameObject.tag == "Damage")
+                {
+                    _playerController.Damage(amount);
+                    Debug.Log("Player picked up damage");
+                }
+
+                if (gameObject.tag == "Heal")
+                {
+                    _playerController.Heal(amount);
+                    Debug.Log("Player picked up heal");
+                }
+
+                if (gameObject.tag == "Coin")
+                {
+                    _playerController.AddCoins(amount);
+                    Debug.Log("Player picked up coins");
+                }
+
+                gameObject.SetActive(false);
             }
-            
-            if (gameObject.tag == "Coin")
-            {
-                _playerController.AddCoins(amount);
-                Debug.Log("Player picked up coins");
-            }
-            
-            gameObject.SetActive(false);
         }
     }
 }
