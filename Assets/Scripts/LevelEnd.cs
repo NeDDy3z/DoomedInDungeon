@@ -7,8 +7,14 @@ using UnityEngine.SceneManagement;
 
 
 
+/// <summary>
+/// Triggers the end of a level when the player enters a specified collider.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for triggering the end of a level.
+    /// </summary>
     public class LevelEnd : MonoBehaviour
     {
         private GameManager _gameManager;
@@ -23,7 +29,10 @@ namespace Scripts
             _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         }
 
-        //Map End
+        /// <summary>
+        /// Called when the collider of the level end is triggered by the player.
+        /// </summary>
+        /// <param name="col">The collider that triggered the event.</param>
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player" || col.gameObject.tag == "HitboxPlayer")
@@ -40,6 +49,5 @@ namespace Scripts
                 Debug.Log("Player entered end of level");
             }
         }
-
     }
 }

@@ -1,10 +1,20 @@
 ﻿using System;
 using UnityEngine;
 
+
+/// <summary>
+/// Controls the trading interactions with the player.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling trading interactions.
+    /// </summary>
     public class TraderController : MonoBehaviour
     {
+        /// <summary>
+        /// The trading user interface GameObject.
+        /// </summary>
         public GameObject tradingUi;
 
         private GameManager _gameManager;
@@ -19,16 +29,16 @@ namespace Scripts
             _playerController = player.GetComponent<PlayerController>();
             _gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
 
-
             tradingUi.SetActive(false);
         }
 
         private void Update()
         {
-
         }
 
-
+        /// <summary>
+        /// Handles the buying of the heal item by the player.
+        /// </summary>
         public void HealBought()
         {
             if (_playerController.coins >= 20)
@@ -48,7 +58,6 @@ namespace Scripts
             {
                 Debug.Log("Player tried to buy heal - has no money");
             }
-
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -62,6 +71,5 @@ namespace Scripts
             tradingUi.SetActive(false);
             _gameManager.gameState = GameManager.GameState.Game;
         }
-        
     }
 }

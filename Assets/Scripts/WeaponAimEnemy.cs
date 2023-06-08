@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/// <summary>
+/// Controls the aiming direction and rotation of an enemy weapon based on the position of the player.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for aiming the enemy weapon.
+    /// </summary>
     public class WeaponAimEnemy : MonoBehaviour
     {
         public EnemyController _enemyController;

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/// <summary>
+/// Controls the firing mechanism of a weapon.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling weapon firing.
+    /// </summary>
     public class WeaponController : MonoBehaviour
     {
         public float damage;
@@ -17,8 +22,13 @@ namespace Scripts
         public Animator _animator;
         public GameObject bulletPrefab;
 
+        public AudioSource _audioSource;
+
         private GameManager _gameManager;
 
+        /// <summary>
+        /// Enum defining the types of weapons.
+        /// </summary>
         public enum WeaponType
         {
             Handgun,
@@ -40,6 +50,9 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Fires a projectile from the weapon.
+        /// </summary>
         public void Fire()
         {
             if (_gameManager.gameState == GameManager.GameState.Game)
@@ -63,8 +76,13 @@ namespace Scripts
 
                 projectileBullet.damage = damage;
                 projectileBullet.speed = bulletSpeed;
+
+                if (PlayerPrefs.GetInt("sound") == 1)
+                {
+                    _audioSource.time = 0;
+                    _audioSource.Play();
+                }
             }
         }
-        
     }
 }

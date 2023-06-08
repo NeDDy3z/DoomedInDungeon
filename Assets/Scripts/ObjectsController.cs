@@ -4,8 +4,15 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
+
+/// <summary>
+/// Controls the behavior of objects that can be picked up by the player.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling objects that can be picked up by the player.
+    /// </summary>
     public class ObjectsController : MonoBehaviour
     {
         public int amount;
@@ -20,6 +27,10 @@ namespace Scripts
             _playerController = player.GetComponent<PlayerController>();
         }
 
+        /// <summary>
+        /// Called when a collider enters the trigger collider of the object.
+        /// </summary>
+        /// <param name="col">The collider that entered the trigger.</param>
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")

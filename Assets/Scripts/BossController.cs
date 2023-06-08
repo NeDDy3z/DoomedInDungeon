@@ -5,8 +5,14 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Controls the behavior of a boss enemy in the game.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling a boss enemy in the game.
+    /// </summary>
     public class BossController : MonoBehaviour
     {
         public float speed;
@@ -61,9 +67,13 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Called when a collider enters the trigger collider of the boss.
+        /// </summary>
+        /// <param name="col">The collider that entered the trigger.</param>
         private void OnTriggerEnter2D(Collider2D col)
         {
-            //melee
+            // Melee attack
             if (col.gameObject.tag == "Player")
             {
                 _animator.SetTrigger("Attack");
@@ -81,6 +91,10 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Applies damage to the boss enemy.
+        /// </summary>
+        /// <param name="amount">The amount of damage to apply.</param>
         public void Damage(float amount)
         {
             hp -= amount;
@@ -96,6 +110,5 @@ namespace Scripts
             Thread.Sleep(5000);
             Destroy(transform.gameObject);
         }
-
     }
 }

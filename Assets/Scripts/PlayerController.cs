@@ -4,16 +4,44 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
+/// <summary>
+/// Controls the player character, manages player health and coins, and interacts with the UI.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling the player.
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
+        /// <summary>
+        /// The current health points of the player.
+        /// </summary>
         public float hp;
+
+        /// <summary>
+        /// The maximum health points of the player.
+        /// </summary>
         public float maxHp;
+
+        /// <summary>
+        /// The current number of coins collected by the player.
+        /// </summary>
         public float coins;
+
+        /// <summary>
+        /// The movement speed of the player.
+        /// </summary>
         public float movementSpeed = 2f;
 
+        /// <summary>
+        /// Reference to the character GameObject.
+        /// </summary>
         public GameObject character;
+
+        /// <summary>
+        /// Reference to the Animator component of the character.
+        /// </summary>
         public Animator _animator;
 
         private Rigidbody2D rb;
@@ -73,6 +101,9 @@ namespace Scripts
             mousePos = Input.mousePosition - dir;
         }
 
+        /// <summary>
+        /// Called at a fixed interval for physics-related updates.
+        /// </summary>
         void FixedUpdate()
         {
             Vector3 moveInput = new Vector3(
@@ -95,6 +126,10 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Freezes or unfreezes the player's movement.
+        /// </summary>
+        /// <param name="choice">True to freeze the player, false to unfreeze.</param>
         public void Freeze(bool choice)
         {
             freeze = choice;
@@ -102,8 +137,9 @@ namespace Scripts
             Debug.Log("Player frozen: " + freeze);
         }
 
-
-
+        /// <summary>
+        /// Sets the player's health points to the maximum value.
+        /// </summary>
         public void SetMaxHP()
         {
             hp = maxHp;
@@ -112,6 +148,10 @@ namespace Scripts
             Debug.Log("HP set to max");
         }
 
+        /// <summary>
+        /// Heals the player by the specified amount.
+        /// </summary>
+        /// <param name="amount">The amount of health to restore.</param>
         public void Heal(float amount)
         {
             hp += amount;
@@ -126,6 +166,10 @@ namespace Scripts
             Debug.Log("Healed: +" + amount);
         }
 
+        /// <summary>
+        /// Damages the player by the specified amount.
+        /// </summary>
+        /// <param name="amount">The amount of damage to inflict.</param>
         public void Damage(float amount)
         {
             hp -= amount;
@@ -145,6 +189,10 @@ namespace Scripts
             Debug.Log("Player died");
         }
 
+        /// <summary>
+        /// Adds the specified amount of coins to the player's collection.
+        /// </summary>
+        /// <param name="amount">The amount of coins to add.</param>
         public void AddCoins(float amount)
         {
             coins += amount;
@@ -153,6 +201,10 @@ namespace Scripts
             Debug.Log("Coins " + (coins - amount) + ": +" + amount + " = " + coins);
         }
 
+        /// <summary>
+        /// Subtracts the specified amount of coins from the player's collection.
+        /// </summary>
+        /// <param name="amount">The amount of coins to subtract.</param>
         public void SubtractCoins(float amount)
         {
             coins -= amount;
@@ -160,6 +212,5 @@ namespace Scripts
 
             Debug.Log("Coins: -" + amount);
         }
-
     }
 }

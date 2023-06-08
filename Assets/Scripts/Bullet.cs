@@ -5,8 +5,14 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Controls the behavior of bullets in the game.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling bullets in the game.
+    /// </summary>
     public class Bullet : MonoBehaviour
     {
         public Rigidbody2D rb;
@@ -18,6 +24,9 @@ namespace Scripts
 
         private PlayerController _playerController;
 
+        /// <summary>
+        /// The entity that fired the bullet.
+        /// </summary>
         public enum FiredBy
         {
             Player,
@@ -28,14 +37,18 @@ namespace Scripts
         {
             _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
-            Debug.Log("Damaga: " + damage + " Fired By: " + _firedBy);
+            Debug.Log("Damage: " + damage + " Fired By: " + _firedBy);
         }
 
+        /// <summary>
+        /// Called when a collider enters the trigger collider of the bullet.
+        /// </summary>
+        /// <param name="col">The collider that entered the trigger.</param>
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "WallCollision")
             {
-                Destroy(transform.gameObject); //runs into wall, it destroys itself
+                Destroy(transform.gameObject); // Runs into a wall, destroys itself
             }
 
             if (col.gameObject.tag == "HitboxPlayer" && _firedBy == FiredBy.Enemy)
@@ -52,6 +65,5 @@ namespace Scripts
                 Debug.Log("Bullet hit enemy");
             }
         }
-        
     }
 }

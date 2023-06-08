@@ -5,8 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
+/// <summary>
+/// Controls the aiming direction and rotation of a weapon based on the position of the mouse cursor.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for aiming the weapon.
+    /// </summary>
     public class WeaponAim : MonoBehaviour
     {
         private GameManager _gameManager;

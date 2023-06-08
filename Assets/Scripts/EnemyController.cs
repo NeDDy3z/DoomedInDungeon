@@ -7,16 +7,25 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Controls the behavior of enemies in the game.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for controlling enemies in the game.
+    /// </summary>
     public class EnemyController : MonoBehaviour
     {
+        /// <summary>
+        /// The type of enemy.
+        /// </summary>
         public enum EnemyType
         {
-            Minion_Small, //Meele - sword etc...
-            Minion_Medium, //Basic weapon
-            Minion_Large, //Strong weapon
-            Boss //Hardcore mf
+            Minion_Small, // Melee - sword etc...
+            Minion_Medium, // Basic weapon
+            Minion_Large, // Strong weapon
+            Boss // Hardcore mf
         }
 
         public float speed;
@@ -90,15 +99,23 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Called when a collider enters the trigger collider of the object.
+        /// </summary>
+        /// <param name="col">The collider that entered the trigger.</param>
         private void OnTriggerEnter2D(Collider2D col)
         {
-            //melee
+            // Melee attack
             if (col.gameObject.tag == "Player")
             {
                 weaponAnim.SetBool("Attack", true);
             }
         }
 
+        /// <summary>
+        /// Called when a collider exits the trigger collider of the object.
+        /// </summary>
+        /// <param name="col">The collider that exited the trigger.</param>
         private void OnTriggerExit2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
@@ -107,7 +124,9 @@ namespace Scripts
             }
         }
 
-
+        /// <summary>
+        /// Perform an enemy attack.
+        /// </summary>
         private void EnemyFire()
         {
             if (_playerDetection.playerVisible)
@@ -117,6 +136,10 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Inflict damage to the enemy.
+        /// </summary>
+        /// <param name="amount">The amount of damage to inflict.</param>
         public void Damage(float amount)
         {
             hp -= amount;
@@ -126,11 +149,13 @@ namespace Scripts
             }
         }
 
+        /// <summary>
+        /// Perform death actions for the enemy.
+        /// </summary>
         private void Death()
         {
             _animator.SetBool("Moving", false);
             Destroy(transform.gameObject);
         }
-
     }
 }

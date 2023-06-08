@@ -12,6 +12,7 @@ TagManager:
   - HitboxPlayer
   - HitboxEnemy
   - WallCollision
+  - Music
   layers:
   - Default
   - TransparentFX

@@ -5,8 +5,14 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Detects collisions with entities (player or enemy) in the game.
+/// </summary>
 namespace Scripts
 {
+    /// <summary>
+    /// Class responsible for detecting collisions with entities (player or enemy) in the game.
+    /// </summary>
     public class Hitbox : MonoBehaviour
     {
         public enum Entity
@@ -37,6 +43,5 @@ namespace Scripts
                 _enemyController = enemy.GetComponent<EnemyController>();
             }
         }
-        
     }
 }
