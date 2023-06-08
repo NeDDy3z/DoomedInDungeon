@@ -12,6 +12,7 @@ namespace Scripts
     /// </summary>
     public class TraderController : MonoBehaviour
     {
+   
         /// <summary>
         /// The trading user interface GameObject.
         /// </summary>
@@ -30,9 +31,7 @@ namespace Scripts
             tradingUi.SetActive(false);
         }
 
-        private void Update()
-        {
-        }
+
 
         /// <summary>
         /// Handles the buying of the heal item by the player.

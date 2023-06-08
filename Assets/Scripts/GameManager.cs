@@ -16,8 +16,8 @@ namespace Scripts
     public GameObject options;
     public GameObject credits;
     public GameObject death;
-    public GameObject wait;
     public GameObject gui;
+    public GameObject ending;
     public SoundEffects _soundEffects;
     
     public GameState gameState;
@@ -99,8 +99,8 @@ namespace Scripts
         options.gameObject.SetActive(false);
         credits.gameObject.SetActive(false);
         death.gameObject.SetActive(false);
-        wait.gameObject.SetActive(false);
         gui.gameObject.SetActive(false);
+        ending.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -177,7 +177,8 @@ namespace Scripts
         /// </summary>
         public void End()
         {
-
+            Time.timeScale = 0;
+            ending.gameObject.SetActive(true);
         }
 
         /// <summary>
