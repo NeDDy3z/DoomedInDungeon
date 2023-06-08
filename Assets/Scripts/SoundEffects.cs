@@ -10,7 +10,7 @@ public class SoundEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetInt("music") == null)
+        if (!PlayerPrefs.HasKey("music"))
         {
             PlayerPrefs.SetInt("music", 1);
         }
@@ -26,7 +26,7 @@ public class SoundEffects : MonoBehaviour
         }
 
 
-        if (PlayerPrefs.GetInt("sounds") == null)
+        if (!PlayerPrefs.HasKey("sounds"))
         {
             PlayerPrefs.SetInt("music", 1);
         }

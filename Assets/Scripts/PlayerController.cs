@@ -17,12 +17,12 @@ namespace Scripts
         /// <summary>
         /// The current health points of the player.
         /// </summary>
-        public float hp;
+        public float hp = 200;
 
         /// <summary>
         /// The maximum health points of the player.
         /// </summary>
-        public float maxHp;
+        public float maxHp = 200;
 
         /// <summary>
         /// The current number of coins collected by the player.
@@ -185,6 +185,7 @@ namespace Scripts
 
         private void Died()
         {
+            Time.timeScale = 0;
             GameObject.FindWithTag("GameController").GetComponent<GameManager>().Death();
             Debug.Log("Player died");
         }

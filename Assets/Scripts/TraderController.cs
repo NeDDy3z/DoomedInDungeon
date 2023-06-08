@@ -21,8 +21,6 @@ namespace Scripts
         private GameObject player;
         private PlayerController _playerController;
 
-        private bool tradable = false;
-
         void Start()
         {
             player = GameObject.FindWithTag("Player");

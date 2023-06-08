@@ -90,7 +90,7 @@ namespace Scripts
             if (showRadius)
             {
                 Gizmos.color = Color.white;
-                UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
+                //UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
 
                 if (playerVisible)
                 {

@@ -169,7 +169,7 @@ namespace Scripts
         public void ExitGame()
         {
             Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
+            //UnityEditor.EditorApplication.isPlaying = false;
         }
 
         /// <summary>
